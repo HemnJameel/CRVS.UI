@@ -19,6 +19,11 @@ namespace CRVS.UI.Controllers
             return View(repository.GetAll());
         }
 
+        public IActionResult Index1()
+        {
+
+            return View(repository.GetAll());
+        }
 
 
         [HttpGet]
