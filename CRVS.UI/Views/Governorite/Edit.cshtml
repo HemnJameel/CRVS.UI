@@ -1,0 +1,31 @@
+﻿@model CRVS.Core.Models.Governorite
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+<form method="post" asp-action="Edit" asp-controller="Governorite">
+    <input type="hidden" asp-for="GovernoriteId" />
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>
+                <label asp-for="GovernoriteName"></label>
+            </td>
+            <td>
+                <input asp-for="GovernoriteName" class="form-control" placeholder="Enter Name" />
+                <span class="text-danger" asp-validation-for="GovernoriteName"></span>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" class="btn btn-success" value="update" />
+                <a asp-action="index" asp-controller="Governorite" class="btn btn-warning">
+                    cancel
+                </a>
+            </td>
+        </tr>
+
+    </table>
+</form>
+

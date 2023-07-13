@@ -1,0 +1,30 @@
+﻿@model CRVS.Core.Models.Doh
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<form method="post" asp-action="Create" asp-controller="Doh">
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>
+                <label asp-for="DohName"></label>
+            </td>
+            <td>
+                <input asp-for="DohName" class="form-control" placeholder="Enter Name" />
+                <span class="text-danger" asp-validation-for="DohName"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" class="btn btn-success" value="Create" />
+                <a asp-action="Index" asp-controller="Doh" class="btn btn-warning">
+                    Cancel
+                </a>
+            </td>
+        </tr>
+    </table>
+
+</form>
+

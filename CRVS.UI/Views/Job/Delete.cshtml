@@ -1,0 +1,16 @@
+﻿@model CRVS.Core.Models.Job
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+<h1>Are You sure to Delete <span class="text-danger"> @Model.JobName</span> ? </h1>
+
+<form asp-action="ConfirmDelete" asp-controller="Job" method="post">
+    <input type="hidden" asp-for="JobId" />
+    <input type="submit" value="Sure, Delete" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-info">
+        cancel
+
+    </a>
+</form>

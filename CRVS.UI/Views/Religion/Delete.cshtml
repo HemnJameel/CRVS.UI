@@ -1,0 +1,16 @@
+﻿@model CRVS.Core.Models.Religion
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+<h1>Are You sure to Delete <span class="text-danger"> @Model.ReligionName</span> ? </h1>
+
+<form asp-action="ConfirmDelete" asp-controller="Religion" method="post">
+    <input type="hidden" asp-for="ReligionName" />
+    <input type="submit" value="Sure, Delete" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-info">
+        cancel
+
+    </a>
+</form>

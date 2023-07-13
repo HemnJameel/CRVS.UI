@@ -1,0 +1,48 @@
+﻿@model CRVS.Core.Models.Religion
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<div class="card">
+    <div class="card-header">
+        Religion Informations
+
+    </div>
+    <div class="card-body">
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+                    <label asp-for="ReligionName"></label>
+                </td>
+                <td>
+                    @Model.ReligionName
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="ReligionId"></label>
+                </td>
+                <td>
+                    @Model.ReligionId
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" class="btn btn-success" value="Create" />
+                    <a asp-action="Index" asp-controller="Religion" class="btn btn-warning">
+                        Cancel
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Index" asp-controller="Religion" class="btn btn-outline-dark">
+            back to Religion List
+
+        </a>
+    </div>
+</div>
+

@@ -1,0 +1,31 @@
+﻿@model CRVS.Core.Models.Job
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+<form method="post" asp-action="Edit" asp-controller="Job">
+    <input type="hidden" asp-for="JobId" />
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>
+                <label asp-for="JobName"></label>
+            </td>
+            <td>
+                <input asp-for="JobName" class="form-control" placeholder="Enter Name" />
+                <span class="text-danger" asp-validation-for="JobName"></span>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" class="btn btn-success" value="update" />
+                <a asp-action="index" asp-controller="Job" class="btn btn-warning">
+                    cancel
+                </a>
+            </td>
+        </tr>
+
+    </table>
+</form>
+

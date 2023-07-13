@@ -1,0 +1,48 @@
+﻿@model CRVS.Core.Models.Nationality
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<div class="card">
+    <div class="card-header">
+        Nationality Informations
+
+    </div>
+    <div class="card-body">
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+                    <label asp-for="NationalityName"></label>
+                </td>
+                <td>
+                    @Model.NationalityName
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="NationalityId"></label>
+                </td>
+                <td>
+                    @Model.NationalityId
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" class="btn btn-success" value="Create" />
+                    <a asp-action="Index" asp-controller="Nationality" class="btn btn-warning">
+                        Cancel
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Index" asp-controller="Nationality" class="btn btn-outline-dark">
+            back to Nationality List
+
+        </a>
+    </div>
+</div>
+

@@ -1,0 +1,48 @@
+﻿@model CRVS.Core.Models.Governorite
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<div class="card">
+    <div class="card-header">
+        Governorite Informations
+
+    </div>
+    <div class="card-body">
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+                    <label asp-for="GovernoriteName"></label>
+                </td>
+                <td>
+                    @Model.GovernoriteName
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="GovernoriteId"></label>
+                </td>
+                <td>
+                    @Model.GovernoriteId
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" class="btn btn-success" value="Create" />
+                    <a asp-action="Index" asp-controller="Governorite" class="btn btn-warning">
+                        Cancel
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Index" asp-controller="Governorite" class="btn btn-outline-dark">
+            back to Governorite List
+
+        </a>
+    </div>
+</div>
+
