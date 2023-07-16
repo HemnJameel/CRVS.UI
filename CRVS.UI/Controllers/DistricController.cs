@@ -4,16 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRVS.UI.Controllers
 {
-    public class DohController : Controller
+    public class DistricController : Controller
     {
-        public IBaseRepository<Doh> repository;
-        public IBaseRepository<NahiaHistory> Nrepository;
+        public IBaseRepository<District> repository;
 
-        public DohController(IBaseRepository<Doh> _repository, IBaseRepository<NahiaHistory> nrepository)
+        public DistricController(IBaseRepository<District> _repository)
         {
 
             repository = _repository;
-            Nrepository = nrepository;
         }
         public IActionResult Index()
         {
@@ -21,11 +19,7 @@ namespace CRVS.UI.Controllers
             return View(repository.GetAll());
         }
 
-        public IActionResult Index1()
-        {
-
-            return View(repository.GetAll());
-        }
+     
 
 
         [HttpGet]
@@ -35,21 +29,14 @@ namespace CRVS.UI.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Doh doh)
+        public IActionResult Create(District district)
         {
             // Default Values
             if (ModelState.IsValid)
             {
 
-                repository.Add(doh);
+                repository.Add(district);
                 repository.SaveChanges();
-
-                NahiaHistory nn = new NahiaHistory
-                {
-                    NahiaHistorydate = DateTime.Now,
-                    NahiaHistoryName = doh.DohName
-                };
-                Nrepository.Add(nn);
                 return RedirectToAction(nameof(Index));
             }
             return View(repository);
@@ -61,16 +48,16 @@ namespace CRVS.UI.Controllers
         {
             if (id == null) { return RedirectToAction(nameof(Index)); }
 
-            var doh = repository.GetById(id);
-            if (doh == null) { return RedirectToAction(nameof(Index)); }
-            repository.Delete(doh.DohId);
+            var district = repository.GetById(id);
+            if (district == null) { return RedirectToAction(nameof(Index)); }
+            repository.Delete(district.DistrictId);
 
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
-        public IActionResult ConfirmDelete(Doh doh)
+        public IActionResult ConfirmDelete(District district)
         {
-            repository.Delete(doh.DohId);
+            repository.Delete(district.DistrictId);
 
             return RedirectToAction(nameof(Index));
         }
@@ -80,11 +67,11 @@ namespace CRVS.UI.Controllers
         {
             if (id == null) { return RedirectToAction(nameof(Index)); }
 
-            var doh = repository.GetById(id);
-            if (doh == null) { return RedirectToAction(nameof(Index)); }
+            var district = repository.GetById(id);
+            if (district == null) { return RedirectToAction(nameof(Index)); }
 
 
-            return View(doh);
+            return View(district);
         }
         [HttpGet]
 
@@ -96,14 +83,14 @@ namespace CRVS.UI.Controllers
 
         }
         [HttpPost]
-        public IActionResult Edit(Doh doh)
+        public IActionResult Edit(District district)
         {
             // Default Values
             if (ModelState.IsValid)
             {
-                var data = repository.GetById(doh.DohId);
-                data.DohName = doh.DohName;
-                repository.UpdateData(doh.DohId, doh);
+                var data = repository.GetById(district.DistrictId);
+                data.DistrictName = district.DistrictName;
+                repository.UpdateData(district.DistrictId, district);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -112,6 +99,4 @@ namespace CRVS.UI.Controllers
         }
     }
 
-
 }
-

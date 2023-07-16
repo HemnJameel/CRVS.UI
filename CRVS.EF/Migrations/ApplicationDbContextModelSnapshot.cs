@@ -407,6 +407,8 @@ namespace CRVS.EF.Migrations
 
                     b.HasKey("DohId");
 
+                    b.HasIndex("GovernoriteId");
+
                     b.ToTable("Dohs");
                 });
 
@@ -506,6 +508,25 @@ namespace CRVS.EF.Migrations
                     b.HasKey("NahiaId");
 
                     b.ToTable("Nahias");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.NahiaHistory", b =>
+                {
+                    b.Property<int>("NahiaHistoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NahiaHistoryId"));
+
+                    b.Property<string>("NahiaHistoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NahiaHistorydate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("NahiaHistoryId");
+
+                    b.ToTable("NahiaHistory");
                 });
 
             modelBuilder.Entity("CRVS.Core.Models.Nationality", b =>
@@ -736,6 +757,17 @@ namespace CRVS.EF.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.Doh", b =>
+                {
+                    b.HasOne("CRVS.Core.Models.Governorite", "Governorite")
+                        .WithMany()
+                        .HasForeignKey("GovernoriteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Governorite");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRVS.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230712112420_t765retyui")]
-    partial class t765retyui
+    [Migration("20230716092313_kjdd")]
+    partial class kjdd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -356,6 +356,195 @@ namespace CRVS.EF.Migrations
                     b.ToTable("BrithCertificates");
                 });
 
+            modelBuilder.Entity("CRVS.Core.Models.Disable", b =>
+                {
+                    b.Property<int>("DisableId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DisableId"));
+
+                    b.Property<string>("DisableName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DisableId");
+
+                    b.ToTable("Disables");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.District", b =>
+                {
+                    b.Property<int>("DistrictId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DistrictId"));
+
+                    b.Property<string>("DistrictName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DohId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GovernoriteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DistrictId");
+
+                    b.ToTable("Districts");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.Doh", b =>
+                {
+                    b.Property<int>("DohId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DohId"));
+
+                    b.Property<string>("DohName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GovernoriteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DohId");
+
+                    b.HasIndex("GovernoriteId");
+
+                    b.ToTable("Dohs");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.FacilityType", b =>
+                {
+                    b.Property<int>("FacilityTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacilityTypeId"));
+
+                    b.Property<string>("FacilityTypeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FacilityTypeId");
+
+                    b.ToTable("facilityTypes");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.Governorite", b =>
+                {
+                    b.Property<int>("GovernoriteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GovernoriteId"));
+
+                    b.Property<string>("GovernoriteName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GovernoriteId");
+
+                    b.ToTable("Governorites");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.HealthInstitution", b =>
+                {
+                    b.Property<int>("HealthInstitutionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HealthInstitutionId"));
+
+                    b.Property<int>("DohId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FacilityTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GovernoriteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HealthInstitutionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("HealthInstitutionId");
+
+                    b.ToTable("HealthInstitutions");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.Job", b =>
+                {
+                    b.Property<int>("JobId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobId"));
+
+                    b.Property<string>("JobName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("JobId");
+
+                    b.ToTable("jobs");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.Nahia", b =>
+                {
+                    b.Property<int>("NahiaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NahiaId"));
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DohId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GovernoriteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NahiaName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NahiaId");
+
+                    b.ToTable("Nahias");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.Nationality", b =>
+                {
+                    b.Property<int>("NationalityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NationalityId"));
+
+                    b.Property<string>("NationalityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NationalityId");
+
+                    b.ToTable("Nationalities");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.Religion", b =>
+                {
+                    b.Property<int>("ReligionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReligionId"));
+
+                    b.Property<string>("ReligionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReligionId");
+
+                    b.ToTable("Religions");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -552,6 +741,17 @@ namespace CRVS.EF.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.Doh", b =>
+                {
+                    b.HasOne("CRVS.Core.Models.Governorite", "Governorite")
+                        .WithMany()
+                        .HasForeignKey("GovernoriteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Governorite");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

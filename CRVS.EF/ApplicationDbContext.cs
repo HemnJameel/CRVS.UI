@@ -27,5 +27,6 @@ namespace CRVS.EF
         public DbSet<Nahia> Nahias { get; set; }
         public DbSet<Nationality> Nationalities { get; set; }
         public DbSet<Religion> Religions { get; set; }
+        public DbSet<NahiaHistory> NahiaHistory { get; set;}
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRVS.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230712113027_four")]
-    partial class four
+    [Migration("20230716122011_nahiahii")]
+    partial class nahiahii
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -386,7 +386,7 @@ namespace CRVS.EF.Migrations
                     b.Property<int>("DohId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GovernariteId")
+                    b.Property<int>("GovernoriteId")
                         .HasColumnType("int");
 
                     b.HasKey("DistrictId");
@@ -405,10 +405,12 @@ namespace CRVS.EF.Migrations
                     b.Property<string>("DohName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GovernariteId")
+                    b.Property<int>("GovernoriteId")
                         .HasColumnType("int");
 
                     b.HasKey("DohId");
+
+                    b.HasIndex("GovernoriteId");
 
                     b.ToTable("Dohs");
                 });
@@ -429,20 +431,20 @@ namespace CRVS.EF.Migrations
                     b.ToTable("facilityTypes");
                 });
 
-            modelBuilder.Entity("CRVS.Core.Models.Governarite", b =>
+            modelBuilder.Entity("CRVS.Core.Models.Governorite", b =>
                 {
-                    b.Property<int>("GovernariteId")
+                    b.Property<int>("GovernoriteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GovernariteId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GovernoriteId"));
 
-                    b.Property<string>("GovernariteName")
+                    b.Property<string>("GovernoriteName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("GovernariteId");
+                    b.HasKey("GovernoriteId");
 
-                    b.ToTable("governarites");
+                    b.ToTable("Governorites");
                 });
 
             modelBuilder.Entity("CRVS.Core.Models.HealthInstitution", b =>
@@ -459,7 +461,7 @@ namespace CRVS.EF.Migrations
                     b.Property<int>("FacilityTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GovernariteId")
+                    b.Property<int>("GovernoriteId")
                         .HasColumnType("int");
 
                     b.Property<string>("HealthInstitutionName")
@@ -500,7 +502,7 @@ namespace CRVS.EF.Migrations
                     b.Property<int>("DohId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GovernariteId")
+                    b.Property<int>("GovernoriteId")
                         .HasColumnType("int");
 
                     b.Property<string>("NahiaName")
@@ -509,6 +511,25 @@ namespace CRVS.EF.Migrations
                     b.HasKey("NahiaId");
 
                     b.ToTable("Nahias");
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.NahiaHistory", b =>
+                {
+                    b.Property<int>("NahiaHistoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NahiaHistoryId"));
+
+                    b.Property<string>("NahiaHistoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NahiaHistorydate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("NahiaHistoryId");
+
+                    b.ToTable("NahiaHistory");
                 });
 
             modelBuilder.Entity("CRVS.Core.Models.Nationality", b =>
@@ -739,6 +760,17 @@ namespace CRVS.EF.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("CRVS.Core.Models.Doh", b =>
+                {
+                    b.HasOne("CRVS.Core.Models.Governorite", "Governorite")
+                        .WithMany()
+                        .HasForeignKey("GovernoriteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Governorite");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
