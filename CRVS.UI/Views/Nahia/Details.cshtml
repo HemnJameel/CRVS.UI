@@ -1,0 +1,48 @@
+﻿@model CRVS.Core.Models.Nahia
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<div class="card">
+    <div class="card-header">
+        Nahia Informations
+
+    </div>
+    <div class="card-body">
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+                    <label asp-for="NahiaName"></label>
+                </td>
+                <td>
+                    @Model.NahiaName
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="NahiaId"></label>
+                </td>
+                <td>
+                    @Model.NahiaId
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" class="btn btn-success" value="Create" />
+                    <a asp-action="Index" asp-controller="Nahia" class="btn btn-warning">
+                        Cancel
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Index" asp-controller="Nahia" class="btn btn-outline-dark">
+            back to Nahia List
+
+        </a>
+    </div>
+</div>
+

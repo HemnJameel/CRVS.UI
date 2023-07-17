@@ -11,6 +11,7 @@ namespace CRVS.Core.IRepositories
         T GetById(int id);
         Task<T> GetByIdAsync(int id);
         IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(int id);
         Task<IEnumerable<T>> GetAllAsync();
         void Add(T model);
         void UpdateData (int id , T model);

@@ -11,6 +11,7 @@ public class Governorite
     {
         public int GovernoriteId { get; set; }
         public string ?GovernoriteName { get; set; }
+      
         [NotMapped]
         public int DohId { get; set; }
        

@@ -42,6 +42,11 @@ namespace CRVS.EF.Repositories
            return _context.Set<T>();
         }
 
+        public IEnumerable<T> GetAll(int id)
+        {
+            return _context.Set<T>(); 
+                }
+
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();

@@ -13,6 +13,7 @@ public class District
         public string ? DistrictName { get; set; }
         public int GovernoriteId { get; set; }
         public int DohId { get; set; }
+      
        
 
     }

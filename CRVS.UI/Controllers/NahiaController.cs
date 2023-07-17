@@ -5,16 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRVS.UI.Controllers
 {
-    public class DohController : Controller
+    public class NahiaController : Controller
     {
-        public IBaseRepository<Doh> repository;
-        public IBaseRepository<DohHistory> Drepository;
+        public IBaseRepository<Nahia> repository;
+        public IBaseRepository<NahiaHistory> Nrepository;
         private ApplicationDbContext db;
-        public DohController( ApplicationDbContext _db,IBaseRepository<Doh> _repository, IBaseRepository<DohHistory> drepository)
+
+        public NahiaController( ApplicationDbContext _db ,IBaseRepository<Nahia> _repository, IBaseRepository<NahiaHistory> nrepository)
         {
 
             repository = _repository;
-           Drepository = drepository;
+            Nrepository = nrepository;
             db = _db;
         }
         public IActionResult Index()
@@ -23,11 +24,7 @@ namespace CRVS.UI.Controllers
             return View(repository.GetAll());
         }
 
-        public IActionResult Index1()
-        {
-
-            return View(repository.GetAll());
-        }
+     
 
 
         [HttpGet]
@@ -37,23 +34,24 @@ namespace CRVS.UI.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Doh doh)
+        public IActionResult Create(Nahia nahia)
         {
             // Default Values
             if (ModelState.IsValid)
             {
 
-                repository.Add(doh);
+                repository.Add(nahia);
                 repository.SaveChanges();
 
-                DohHistory dd = new DohHistory
+                NahiaHistory nn = new NahiaHistory
                 {
-                    DohHistorydate = DateTime.Now,
-                    DohHistoryName = doh.DohName,
-                    DohCode=doh.DohId,
-                    DohType="Create"
+                    NahiaHistorydate = DateTime.Now,
+                    NahiaHistoryName = nahia.NahiaName,
+                    NahiaType="Create",
+                    NahiaCode=nahia.NahiaId
+                    
                 };
-                Drepository.Add(dd);
+                Nrepository.Add(nn);
                 return RedirectToAction(nameof(Index));
             }
             return View(repository);
@@ -65,16 +63,16 @@ namespace CRVS.UI.Controllers
         {
             if (id == null) { return RedirectToAction(nameof(Index)); }
 
-            var doh = repository.GetById(id);
-            if (doh == null) { return RedirectToAction(nameof(Index)); }
-            repository.Delete(doh.DohId);
+            var nahia = repository.GetById(id);
+            if (nahia == null) { return RedirectToAction(nameof(Index)); }
+            repository.Delete(nahia.NahiaId);
 
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
-        public IActionResult ConfirmDelete(Doh doh)
+        public IActionResult ConfirmDelete(Nahia nahia)
         {
-            repository.Delete(doh.DohId);
+            repository.Delete(nahia.NahiaId);
 
             return RedirectToAction(nameof(Index));
         }
@@ -84,11 +82,11 @@ namespace CRVS.UI.Controllers
         {
             if (id == null) { return RedirectToAction(nameof(Index)); }
 
-            var doh = repository.GetById(id);
-            if (doh == null) { return RedirectToAction(nameof(Index)); }
+            var nahia = repository.GetById(id);
+            if (nahia == null) { return RedirectToAction(nameof(Index)); }
 
 
-            return View(doh);
+            return View(nahia);
         }
         [HttpGet]
 
@@ -100,21 +98,20 @@ namespace CRVS.UI.Controllers
 
         }
         [HttpPost]
-        public IActionResult Edit(Doh doh)
+        public IActionResult Edit(Nahia nahia)
         {
             // Default Values
             if (ModelState.IsValid)
             {
-                var data = repository.GetById(doh.DohId);
-                data.DohName = doh.DohName;
-                DohHistory dd = new DohHistory
+                var data = repository.GetById(nahia.NahiaId);
+                data.NahiaName = nahia.NahiaName;
+                NahiaHistory nn = new NahiaHistory
                 {
-                    DohHistorydate = DateTime.Now,
-                    DohHistoryName = doh.DohName,
-                    DohCode=doh.DohId,
-                    DohType = "Update"
+                    NahiaHistorydate = DateTime.Now,
+                    NahiaHistoryName = nahia.NahiaName,
+                    NahiaType = "Update",
+                    NahiaCode=nahia.NahiaId
                 };
-                Drepository.Add(dd);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -127,14 +124,11 @@ namespace CRVS.UI.Controllers
         {
             if (id == null) { return RedirectToAction(nameof(Index)); }
 
-            var doh = db.DohHistories.Where(x => x.DohCode == id);
-            if (doh == null) { return RedirectToAction(nameof(Index)); }
+            var nahia = db.nahiaHistories.Where(x => x.NahiaCode == id);
+            if (nahia == null) { return RedirectToAction(nameof(Index)); }
 
 
-            return View(doh);
+            return View(nahia);
         }
     }
-
-
 }
-

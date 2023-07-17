@@ -11,5 +11,7 @@ namespace CRVS.Core.Models
         public int NahiaHistoryId { get; set; }
         public string? NahiaHistoryName { get; set; }
         public DateTime NahiaHistorydate { get; set; }
+        public string? NahiaType { get; set; }
+        public int NahiaCode { get; set; }
     }
 }

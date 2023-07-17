@@ -1,17 +1,24 @@
 ﻿using CRVS.Core.IRepositories;
 using CRVS.Core.Models;
+using CRVS.EF;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Core.Types;
 
 namespace CRVS.UI.Controllers
 {
     public class GovernoriteController : Controller
     {
         public IBaseRepository<Governorite> repository;
+        public IBaseRepository<GovernoriteHistory> Grepository;
+        private ApplicationDbContext db;
 
-        public GovernoriteController(IBaseRepository<Governorite> _repository)
+
+        public GovernoriteController(ApplicationDbContext _db, IBaseRepository<Governorite> _repository, IBaseRepository<GovernoriteHistory> grepository)
         {
 
             repository = _repository;
+            Grepository = grepository;
+            db = _db;
         }
         public IActionResult Index()
         {
@@ -33,9 +40,17 @@ namespace CRVS.UI.Controllers
             // Default Values
             if (ModelState.IsValid)
             {
-
                 repository.Add(governorite);
                 repository.SaveChanges();
+
+                GovernoriteHistory gg = new GovernoriteHistory
+                {
+                    GovernoriteHistorydate = DateTime.Now,
+                    GovernoriteHistoryName = governorite.GovernoriteName,
+                    GovernoriteType="Create",
+                    GovernoriteCode = governorite.GovernoriteId
+                };
+                Grepository.Add(gg);
                 return RedirectToAction(nameof(Index));
             }
             return View(repository);
@@ -89,11 +104,31 @@ namespace CRVS.UI.Controllers
             {
                 var data = repository.GetById(governorite.GovernoriteId);
                 data.GovernoriteName = governorite.GovernoriteName;
-                repository.UpdateData(governorite.GovernoriteId, governorite);
+                GovernoriteHistory gg = new GovernoriteHistory
+                {
+                    GovernoriteHistorydate = DateTime.Now,
+                    GovernoriteHistoryName = governorite.GovernoriteName,
+                    GovernoriteType = "Update",
+                    GovernoriteCode=governorite.GovernoriteId
+
+                };
+                Grepository.Add(gg);
 
                 return RedirectToAction(nameof(Index));
             }
             return View(repository);
+        }
+        [HttpGet]
+        public IActionResult History(int? id)
+
+        {
+            if (id == null) { return RedirectToAction(nameof(Index)); }
+
+            var governorites  = db.GovernoriteHistories.Where(x => x.GovernoriteCode == id);
+            if (governorites == null) { return RedirectToAction(nameof(Index)); }
+
+
+            return View(governorites);
         }
     }
 }

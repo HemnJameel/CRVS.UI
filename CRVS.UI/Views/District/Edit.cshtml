@@ -1,11 +1,11 @@
 ﻿@model CRVS.Core.Models.District
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
-<form method="post" asp-action="Create" asp-controller="District">
-
+<h1>Edit</h1>
+<form method="post" asp-action="Edit" asp-controller="District">
+    <input type="hidden" asp-for="DistrictId" />
     <table class="table table-bordered table-striped">
         <tr>
             <td>
@@ -13,19 +13,19 @@
             </td>
             <td>
                 <input asp-for="DistrictName" class="form-control" placeholder="Enter Name" />
-              
-
                 <span class="text-danger" asp-validation-for="DistrictName"></span>
+
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" class="btn btn-success" value="Create" />
-                <a asp-action="Index" asp-controller="District" class="btn btn-warning">
-                    Cancel
+                <input type="submit" class="btn btn-success" value="update" />
+                <a asp-action="index" asp-controller="District" class="btn btn-warning">
+                    cancel
                 </a>
             </td>
         </tr>
-    </table>
 
+    </table>
 </form>
+

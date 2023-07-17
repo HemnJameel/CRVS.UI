@@ -11,10 +11,12 @@ namespace CRVS.Core.Models
     {
         public int DohId { get; set; }
         public string? DohName { get; set; }
+      
 
         [ForeignKey("Governorite")]
         public int GovernoriteId { get; set; }
         public Governorite? Governorite { get; set; }   
+        
      
     }
 }

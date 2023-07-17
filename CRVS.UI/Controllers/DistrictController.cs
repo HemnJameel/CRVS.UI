@@ -1,17 +1,23 @@
 ﻿using CRVS.Core.IRepositories;
 using CRVS.Core.Models;
+using CRVS.EF;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Core.Types;
 
 namespace CRVS.UI.Controllers
 {
-    public class DistricController : Controller
+    public class DistrictController : Controller
     {
         public IBaseRepository<District> repository;
+        public IBaseRepository<DistrictHistory> Mrepository;
+        private ApplicationDbContext db;
 
-        public DistricController(IBaseRepository<District> _repository)
+        public DistrictController(ApplicationDbContext _db, IBaseRepository<District> _repository, IBaseRepository<DistrictHistory> mrepository)
         {
 
             repository = _repository;
+            Mrepository = mrepository;
+            db = _db;
         }
         public IActionResult Index()
         {
@@ -19,7 +25,7 @@ namespace CRVS.UI.Controllers
             return View(repository.GetAll());
         }
 
-     
+
 
 
         [HttpGet]
@@ -34,9 +40,19 @@ namespace CRVS.UI.Controllers
             // Default Values
             if (ModelState.IsValid)
             {
-
                 repository.Add(district);
                 repository.SaveChanges();
+
+                DistrictHistory mm = new DistrictHistory
+                {
+                    DistrictHistorydate = DateTime.Now,
+                    DistrictHistoryName = district.DistrictName,
+                    DistrictType = "Create",
+                    DistrictCode = district.DistrictId
+
+
+                };
+                Mrepository.Add(mm);
                 return RedirectToAction(nameof(Index));
             }
             return View(repository);
@@ -90,13 +106,31 @@ namespace CRVS.UI.Controllers
             {
                 var data = repository.GetById(district.DistrictId);
                 data.DistrictName = district.DistrictName;
-                repository.UpdateData(district.DistrictId, district);
-
+                DistrictHistory mm = new DistrictHistory
+                {
+                    DistrictHistorydate = DateTime.Now,
+                    DistrictHistoryName = district.DistrictName,
+                    DistrictType = "Update",
+                    DistrictCode = district.DistrictId
+                };
+                Mrepository.Add(mm);
                 return RedirectToAction(nameof(Index));
             }
             return View(repository);
 
         }
-    }
+        [HttpGet]
+        public IActionResult History(int? id)
 
+        {
+            if (id == null) { return RedirectToAction(nameof(Index)); }
+
+            var district = db.DistrictHistories.Where(x => x.DistrictCode == id);
+            if (district == null) { return RedirectToAction(nameof(Index)); }
+
+          
+            return View(district);
+        }
+    }
 }
+

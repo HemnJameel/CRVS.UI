@@ -4,6 +4,7 @@ using CRVS.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRVS.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230717084552_ggggggg")]
+    partial class ggggggg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -399,9 +402,6 @@ namespace CRVS.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DistrictHistoryId"));
 
-                    b.Property<int>("DistrictCode")
-                        .HasColumnType("int");
-
                     b.Property<string>("DistrictHistoryName")
                         .HasColumnType("nvarchar(max)");
 
@@ -445,17 +445,11 @@ namespace CRVS.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DohHistoryId"));
 
-                    b.Property<int>("DohCode")
-                        .HasColumnType("int");
-
                     b.Property<string>("DohHistoryName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DohHistorydate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DohType")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DohHistoryId");
 
@@ -502,17 +496,11 @@ namespace CRVS.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GovernoriteHistoryId"));
 
-                    b.Property<int>("GovernoriteCode")
-                        .HasColumnType("int");
-
                     b.Property<string>("GovernoriteHistoryName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("GovernoriteHistorydate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("GovernoriteType")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GovernoriteHistoryId");
 
@@ -593,21 +581,15 @@ namespace CRVS.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NahiaHistoryId"));
 
-                    b.Property<int>("NahiaCode")
-                        .HasColumnType("int");
-
                     b.Property<string>("NahiaHistoryName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NahiaHistorydate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("NahiaType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("NahiaHistoryId");
 
-                    b.ToTable("nahiaHistories");
+                    b.ToTable("NahiaHistory");
                 });
 
             modelBuilder.Entity("CRVS.Core.Models.Nationality", b =>

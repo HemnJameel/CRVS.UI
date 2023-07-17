@@ -1,0 +1,30 @@
+﻿@model CRVS.Core.Models.Nahia
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<form method="post" asp-action="Create" asp-controller="Nahia">
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>
+                <label asp-for="NahiaName"></label>
+            </td>
+            <td>
+                <input asp-for="NahiaName" class="form-control" placeholder="Enter Name" />
+                <span class="text-danger" asp-validation-for="NahiaName"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" class="btn btn-success" value="Create" />
+                <a asp-action="Index" asp-controller="Nahia" class="btn btn-warning">
+                    Cancel
+                </a>
+            </td>
+        </tr>
+    </table>
+
+</form>
+

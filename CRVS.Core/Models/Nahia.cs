@@ -14,5 +14,6 @@ public class Nahia
         public int DohId { get; set; }
 
         public int DistrictId { get; set; }
+      
     }
 }
