@@ -2,6 +2,7 @@
 using CRVS.Core.Models;
 using CRVS.EF;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Core.Types;
 
 namespace CRVS.UI.Controllers
 {
@@ -112,7 +113,7 @@ namespace CRVS.UI.Controllers
                     NahiaType = "Update",
                     NahiaCode=nahia.NahiaId
                 };
-
+               Nrepository.Add(nn);
                 return RedirectToAction(nameof(Index));
             }
             return View(repository);

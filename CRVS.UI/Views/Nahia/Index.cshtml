@@ -25,10 +25,10 @@
                     @Html.DisplayFor(modelItem => item.NahiaName)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.NahiaId">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.NahiaId">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.NahiaId">Delete</a>
-                    <a asp-action="History" asp-route-id="@item.NahiaId">History</a>
+                    <a asp-action="Edit" class="btn btn-dark" asp-route-id="@item.NahiaId">Edit</a>
+                    <a asp-action="Details" class="btn btn-success" asp-route-id="@item.NahiaId">Details</a>
+                    <a asp-action="Delete"class="btn btn-danger" asp-route-id="@item.NahiaId">Delete</a>
+                    <a asp-action="History" class="btn btn-primary" asp-route-id="@item.NahiaId">History</a>
                 </td>
             </tr>
         }
