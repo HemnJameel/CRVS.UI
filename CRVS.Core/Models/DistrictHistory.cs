@@ -15,5 +15,6 @@ namespace CRVS.Core.Models
         public string? DistrictType { get; set; }
 
 
+
     }
 }

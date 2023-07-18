@@ -24,8 +24,37 @@ namespace CRVS.UI.Controllers
 
             return View(repository.GetAll());
         }
+        [HttpGet]
+        public IActionResult Activate(int id)
+        {
 
-     
+            var nahia = repository.GetById(id);
+            nahia.IsActive = true;
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
+        }
+        [HttpGet]
+        public IActionResult DeActivate(int id)
+
+        {
+
+            var nahia = repository.GetById(id);
+            nahia.IsActive = false;
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
+        }
+        public IActionResult AllActivate()
+        {
+
+            return View(db.Nahias.Where(x => x.IsActive == true));
+        }
+        public IActionResult AllNotActivate()
+        {
+
+            return View(db.Nahias.Where(x => x.IsActive == false));
+        }
 
 
         [HttpGet]

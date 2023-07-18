@@ -24,7 +24,16 @@ namespace CRVS.UI.Controllers
 
             return View(repository.GetAll());
         }
+        public IActionResult AllActivate()
+        {
 
+            return View(db.Districts.Where(x => x.IsActive == true));
+        }
+        public IActionResult AllNotActivate()
+        {
+
+            return View(db.Districts.Where(x => x.IsActive == false));
+        }
 
 
 
@@ -91,6 +100,27 @@ namespace CRVS.UI.Controllers
         }
         [HttpGet]
 
+        [HttpGet]
+        public IActionResult Activate(int id)
+        {
+
+            var district = repository.GetById(id);
+            district.IsActive = true;
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
+        }
+        [HttpGet]
+        public IActionResult DeActivate(int id)
+
+        {
+
+            var district = repository.GetById(id);
+            district.IsActive = false;
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
+        }
         public IActionResult Edit(int id)
 
         {
@@ -132,5 +162,6 @@ namespace CRVS.UI.Controllers
             return View(district);
         }
     }
+
 }
 

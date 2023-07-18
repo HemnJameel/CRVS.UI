@@ -4,6 +4,7 @@ using CRVS.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRVS.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230718074118_us")]
+    partial class us
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,6 +247,9 @@ namespace CRVS.EF.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDisabled")
                         .HasColumnType("bit");
 
@@ -374,9 +380,6 @@ namespace CRVS.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DistrictId"));
 
-                    b.Property<DateTime>("CreationData")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("DistrictName")
                         .HasColumnType("nvarchar(max)");
 
@@ -385,9 +388,6 @@ namespace CRVS.EF.Migrations
 
                     b.Property<int>("GovernoriteId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.HasKey("DistrictId");
 
@@ -430,6 +430,9 @@ namespace CRVS.EF.Migrations
                     b.Property<DateTime>("CreationData")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("DohActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("DohName")
                         .HasColumnType("nvarchar(max)");
 
@@ -437,6 +440,9 @@ namespace CRVS.EF.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.HasKey("DohId");
@@ -495,14 +501,8 @@ namespace CRVS.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GovernoriteId"));
 
-                    b.Property<DateTime>("CreationData")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("GovernoriteName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.HasKey("GovernoriteId");
 
@@ -583,9 +583,6 @@ namespace CRVS.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NahiaId"));
 
-                    b.Property<DateTime>("CreationData")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("DistrictId")
                         .HasColumnType("int");
 
@@ -594,9 +591,6 @@ namespace CRVS.EF.Migrations
 
                     b.Property<int>("GovernoriteId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.Property<string>("NahiaName")
                         .HasColumnType("nvarchar(max)");

@@ -7,8 +7,11 @@
 
 <p>
     <a asp-action="Create">Create New</a>
-    <a asp-action="AllActivate">Activate</a>
     <a asp-action="AllNotActivate">NotActivate</a>
+
+
+
+
 </p>
 <table class="table">
     <thead>
@@ -16,6 +19,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.DistrictName)
             </th>
+
+
             <th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
@@ -29,7 +34,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.DistrictName)
                 </td>
-              
+
 
                 <th>
 

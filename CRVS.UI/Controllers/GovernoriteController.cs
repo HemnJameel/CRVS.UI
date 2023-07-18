@@ -25,7 +25,16 @@ namespace CRVS.UI.Controllers
 
             return View(repository.GetAll());
         }
+        public IActionResult AllActivate()
+        {
 
+            return View(db.Governorites.Where(x => x.IsActive == true));
+        }
+        public IActionResult AllNotActivate()
+        {
+
+            return View(db.Governorites.Where(x => x.IsActive == false));
+        }
 
 
         [HttpGet]
@@ -86,6 +95,25 @@ namespace CRVS.UI.Controllers
 
 
             return View(governorite);
+        }
+        public IActionResult Activate(int id)
+        {
+
+            var governorite = repository.GetById(id);
+            governorite.IsActive = true;
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
+        }
+        [HttpGet]
+        public IActionResult DeActivate(int id)
+
+        {
+            var governorite = repository.GetById(id);
+            governorite.IsActive = false;
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
         }
         [HttpGet]
 

@@ -9,7 +9,6 @@ namespace CRVS.Core.Models.SheardCode
     public class CommonProp
     {
         #region AllProp
-        public bool IsDeleted { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreationData { get; set; }
         #endregion
