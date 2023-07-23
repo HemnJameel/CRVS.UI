@@ -21,7 +21,7 @@ namespace CRVS.UI.Controllers
         public IActionResult Index()
         {
 
-            return View(repository.GetAll());
+            return View(repository.GetAll().Where(x => x.IsDeleted == false));
         }
 
         public IActionResult AllActivate()
@@ -34,6 +34,44 @@ namespace CRVS.UI.Controllers
 
             return View(db.Dohs.Where(x => x.IsActive == false));
         }
+        public IActionResult SoftDelete(int id)
+        {
+            var mm = db.Dohs.Find(id);
+            mm.IsDeleted = true;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult RecovaryDeleted(int id)
+        {
+            var mm = db.Dohs.Find(id);
+            mm.IsDeleted = false;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult Recovary()
+        {
+
+            return View(db.Dohs.Where(x => x.IsDeleted == true));
+        }
+        public IActionResult SoftDelete2(int id)
+        {
+            var mm = db.Dohs.Find(id);
+            mm.IsDeleted2 = false;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult RecovaryDeleted2(int id)
+        {
+            var mm = db.Dohs.Find(id);
+            mm.IsDeleted2 = true;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult Recovary2()
+        {
+
+            return View(db.Dohs.Where(x => x.IsDeleted2 == true));
+        }
 
         [HttpGet]
         public IActionResult Create()
@@ -41,6 +79,7 @@ namespace CRVS.UI.Controllers
 
             return View();
         }
+
         [HttpPost]
         public IActionResult Create(Doh doh)
         {

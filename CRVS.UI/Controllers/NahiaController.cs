@@ -2,6 +2,8 @@
 using CRVS.Core.Models;
 using CRVS.EF;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using NuGet.Protocol.Core.Types;
 
 namespace CRVS.UI.Controllers
@@ -22,7 +24,7 @@ namespace CRVS.UI.Controllers
         public IActionResult Index()
         {
 
-            return View(repository.GetAll());
+            return View(repository.GetAll().Where(x=>x.IsDeleted==false));
         }
         [HttpGet]
         public IActionResult Activate(int id)
@@ -30,6 +32,16 @@ namespace CRVS.UI.Controllers
 
             var nahia = repository.GetById(id);
             nahia.IsActive = true;
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
+        }
+        [HttpGet]
+        public IActionResult RecovaryDeleted(int id)
+        {
+
+            var nahia = repository.GetById(id);
+            nahia.IsDeleted = false;
             db.SaveChanges();
             return RedirectToAction(nameof(Index));
 
@@ -56,6 +68,21 @@ namespace CRVS.UI.Controllers
             return View(db.Nahias.Where(x => x.IsActive == false));
         }
 
+        public IActionResult SoftDelete(int id)
+        {
+            var mm = db.Nahias.Find(id);
+            mm.IsDeleted = true;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult Recovary()
+        {
+
+            return View(db.Nahias.Where(x => x.IsDeleted == true));
+        }
+
+
+
 
         [HttpGet]
         public IActionResult Create()
@@ -75,6 +102,7 @@ namespace CRVS.UI.Controllers
 
                 NahiaHistory nn = new NahiaHistory
                 {
+                   
                     NahiaHistorydate = DateTime.Now,
                     NahiaHistoryName = nahia.NahiaName,
                     NahiaType="Create",
@@ -137,6 +165,7 @@ namespace CRVS.UI.Controllers
                 data.NahiaName = nahia.NahiaName;
                 NahiaHistory nn = new NahiaHistory
                 {
+                    IsDeleted = false,
                     NahiaHistorydate = DateTime.Now,
                     NahiaHistoryName = nahia.NahiaName,
                     NahiaType = "Update",

@@ -22,7 +22,7 @@ namespace CRVS.UI.Controllers
         public IActionResult Index()
         {
 
-            return View(repository.GetAll());
+            return View(repository.GetAll().Where(x => x.IsDeleted == false));
         }
         public IActionResult AllActivate()
         {
@@ -35,7 +35,25 @@ namespace CRVS.UI.Controllers
             return View(db.Districts.Where(x => x.IsActive == false));
         }
 
+        public IActionResult SoftDelete(int id)
+        {
+            var mm = db.Districts.Find(id);
+            mm.IsDeleted = true;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult RecovaryDeleted(int id)
+        {
+            var mm = db.Districts.Find(id);
+            mm.IsDeleted = false;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult Recovary()
+        {
 
+            return View(db.Districts.Where(x => x.IsDeleted == true));
+        }
 
         [HttpGet]
         public IActionResult Create()

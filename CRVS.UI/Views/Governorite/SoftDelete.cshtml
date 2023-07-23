@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<CRVS.Core.Models.Governorite>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "SoftDelete";
 }
 
-<h1>Index</h1>
+<h1>SoftDelete</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
-    <a asp-action="AllActivate">Activate</a>
-    <a asp-action="AllNotActivate">NotActivate</a>
-    <a asp-action="Recovary">Deleted</a>
+
 </p>
 <table class="table">
     <thead>
@@ -17,8 +15,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.GovernoriteName)
             </th>
+
+
             <th>
-                @Html.DisplayNameFor(model => model.IsActive)
+                @Html.DisplayNameFor(model => model.IsDeleted)
             </th>
             <th></th>
         </tr>
@@ -30,25 +30,30 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.GovernoriteName)
                 </td>
+
+
                 <th>
 
-                    @if (item.IsActive == true)
+                    @if (item.IsDeleted == true)
                     {
-                        <a asp-action="DeActivate" asp-route-id="@item.GovernoriteId" class="text-success">Active</a>
+                        <a asp-action="Delete" asp-route-id="@item.GovernoriteId" class="text-success">Delete</a>
                     }
 
                     else
                     {
-                        <a asp-action="Activate" asp-route-id="@item.GovernoriteId" class="text-danger">Not Active</a>
+                        <a asp-action="Recovary" asp-route-id="@item.GovernoriteId" class="text-danger">Not Delete</a>
 
 
                     }
+
+
+                </th>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.GovernoriteId">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.GovernoriteId">Details</a>
                     @*<a asp-action="Delete" asp-route-id="@item.GovernoriteId">Delete</a>*@
-                    <a asp-action="History" class="btn btn-primary" asp-route-id="@item.GovernoriteId">History</a>
-                    <a asp-action="SoftDelete" class="btn btn-danger" asp-route-id="@item.GovernoriteId">Soft Delete</a>
+                    <a asp-action="History" asp-route-id="@item.GovernoriteId">History</a>
+                    <a asp-action="SoftDelete" asp-route-id="@item.GovernoriteId">SoftDelete</a>
                 </td>
             </tr>
         }

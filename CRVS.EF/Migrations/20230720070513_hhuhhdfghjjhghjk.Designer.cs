@@ -4,6 +4,7 @@ using CRVS.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRVS.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230720070513_hhuhhdfghjjhghjk")]
+    partial class hhuhhdfghjjhghjk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,12 +250,6 @@ namespace CRVS.EF.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDeleted2")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted3")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsDisabled")
                         .HasColumnType("bit");
 
@@ -401,12 +398,6 @@ namespace CRVS.EF.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDeleted2")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted3")
-                        .HasColumnType("bit");
-
                     b.HasKey("DistrictId");
 
                     b.ToTable("Districts");
@@ -458,12 +449,6 @@ namespace CRVS.EF.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted2")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted3")
                         .HasColumnType("bit");
 
                     b.HasKey("DohId");
@@ -532,12 +517,6 @@ namespace CRVS.EF.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted2")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted3")
                         .HasColumnType("bit");
 
                     b.HasKey("GovernoriteId");
@@ -637,12 +616,6 @@ namespace CRVS.EF.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDeleted2")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted3")
-                        .HasColumnType("bit");
-
                     b.Property<string>("NahiaName")
                         .HasColumnType("nvarchar(max)");
 
@@ -666,12 +639,6 @@ namespace CRVS.EF.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted2")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted3")
                         .HasColumnType("bit");
 
                     b.Property<int>("NahiaCode")

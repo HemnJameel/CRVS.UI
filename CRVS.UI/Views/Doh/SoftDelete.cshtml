@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CRVS.Core.Models.Doh>
+@{
+    ViewData["Title"] = "SoftDelete";
+}
+
+<h1>SoftDelete</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DohName)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DohName)
+                </td>
+
+
+                <th>
+
+                    @if (item.IsDeleted == true)
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.DohId" class="text-success">Delete</a>
+                    }
+
+                    else
+                    {
+                        <a asp-action="Recovary" asp-route-id="@item.DohId" class="text-danger">Not Delete</a>
+
+
+                    }
+
+
+                </th>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DohId">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.DohId">Details</a>
+                    @*<a asp-action="Delete" asp-route-id="@item.DohId">Delete</a>*@
+                    <a asp-action="History" asp-route-id="@item.DohId">History</a>
+                    <a asp-action="SoftDelete" asp-route-id="@item.DohId">SoftDelete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

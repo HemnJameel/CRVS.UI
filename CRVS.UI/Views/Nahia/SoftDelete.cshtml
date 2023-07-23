@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CRVS.Core.Models.Nahia>
+@{
+    ViewData["Title"] = "SoftDelete";
+}
+
+<h1>SoftDelete</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NahiaName)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NahiaName)
+                </td>
+
+
+                <th>
+
+                    @if (item.IsDeleted == true)
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.NahiaId" class="text-success">Delete</a>
+                    }
+
+                    else
+                    {
+                        <a asp-action="Recovary" asp-route-id="@item.NahiaId" class="text-danger">Not Delete</a>
+
+
+                    }
+
+
+                </th>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.NahiaId">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.NahiaId">Details</a>
+                    @*<a asp-action="Delete" asp-route-id="@item.NahiaId">Delete</a>*@
+                    <a asp-action="History" asp-route-id="@item.NahiaId">History</a>
+                    <a asp-action="SoftDelete" asp-route-id="@item.NahiaId">SoftDelete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
