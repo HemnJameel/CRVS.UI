@@ -38,7 +38,7 @@
 
                 <th>
 
-                    @if (item.IsDeleted2 == false)
+                    @if (item.IsDeleted2 == true)
                     {
                         <a asp-action="RecovaryDeleted2" asp-route-id="@item.DohId" class="text-success">Restore</a>
                     }

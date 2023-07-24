@@ -7,7 +7,11 @@
 
 <p>
 
-    <a asp-action="Recovary2">Deleted</a>
+
+    <a asp-action="Recovary3">Deleted3</a>
+
+
+
 
 </p>
 <table class="table">
@@ -19,7 +23,7 @@
 
 
             <th>
-                @Html.DisplayNameFor(model => model.IsDeleted)
+                @Html.DisplayNameFor(model => model.IsDeleted2)
             </th>
             <th></th>
         </tr>
@@ -35,9 +39,9 @@
 
                 <th>
 
-                    @if (item.IsDeleted == true)
+                    @if (item.IsDeleted2 == true)
                     {
-                        <a asp-action="RecovaryDeleted" asp-route-id="@item.GovernoriteId" class="text-success">Restore</a>
+                        <a asp-action="RecovaryDeleted2" asp-route-id="@item.GovernoriteId" class="text-success">Restore</a>
                     }
 
                     else
@@ -53,10 +57,10 @@
                     <a asp-action="Edit" asp-route-id="@item.GovernoriteId">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.GovernoriteId">Details</a>
                     
-                    <a asp-action="History" asp-route-id="@item.GovernoriteId">History</a>
-                    <a asp-action="SoftDelete2" asp-route-id="@item.GovernoriteId">Soft Delete 2</a>
-
-
+                    <a asp-action="Delete" asp-route-id="@item.GovernoriteId">Delete</a>
+                    @*<a asp-action="History" asp-route-id="@item.DohId">History</a>*@
+                    @*<a asp-action="Recovary" asp-route-id="@item.DohId">Recovary</a>*@
+                    <a asp-action="SoftDelete3" class="btn btn-secondary " asp-route-id="@item.GovernoriteId">Soft Delete 3</a>
 
                 </td>
 

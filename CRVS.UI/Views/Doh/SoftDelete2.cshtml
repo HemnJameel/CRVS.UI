@@ -34,7 +34,7 @@
 
                 <th>
 
-                    @if (item.IsDeleted2 == false)
+                    @if (item.IsDeleted2 == true)
                     {
                         <a asp-action="Delete" asp-route-id="@item.DohId" class="text-success">Delete</a>
                     }
@@ -51,9 +51,8 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.DohId">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.DohId">Details</a>
-                    @*<a asp-action="Delete" asp-route-id="@item.DohId">Delete</a>*@
+                    <a asp-action="Delete" asp-route-id="@item.DohId">Delete</a>
                     <a asp-action="History" asp-route-id="@item.DohId">History</a>
-                    <a asp-action="SoftDelete" asp-route-id="@item.DohId">SoftDelete</a>
                     <a asp-action="SoftDelete2" asp-route-id="@item.DohId">SoftDelete2</a>
                 </td>
             </tr>

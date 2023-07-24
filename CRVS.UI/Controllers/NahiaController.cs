@@ -24,7 +24,76 @@ namespace CRVS.UI.Controllers
         public IActionResult Index()
         {
 
-            return View(repository.GetAll().Where(x=>x.IsDeleted==false));
+            return View(repository.GetAll().Where(x => x.IsDeleted == false &&
+             x.IsDeleted2 == false && x.IsDeleted3 == false));
+        }
+        public IActionResult SoftDelete(int id)
+        {
+            var hh = db.Nahias.Find(id);
+            hh.IsDeleted = true;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult RecovaryDeleted(int id)
+        {
+            var hh = db.Nahias.Find(id);
+            hh.IsDeleted = false;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult Recovary()
+        {
+
+            return View(db.Nahias.Where(x => x.IsDeleted == true && x.IsDeleted2 == false && x.IsDeleted3 == false));
+        }
+        public IActionResult SoftDelete2(int id)
+        {
+            var hh = db.Nahias.Find(id);
+            hh.IsDeleted2 = true;
+            hh.IsDeleted3 = false;
+            db.SaveChanges();
+            return RedirectToAction("Recovary2");
+        }
+
+        public IActionResult RecovaryDeleted2(int id)
+        {
+            var hh = db.Nahias.Find(id);
+            hh.IsDeleted2 = false;
+            hh.IsDeleted3 = false;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult Recovary2()
+        {
+
+            return View(db.Nahias.Where(x => x.IsDeleted == true && x.IsDeleted2 == true && x.IsDeleted3 == false));
+
+
+
+        }
+        public IActionResult SoftDelete3(int id)
+        {
+            var hh = db.Nahias.Find(id);
+            hh.IsDeleted3 = true;
+            db.SaveChanges();
+            return RedirectToAction("Recovary3");
+        }
+
+        public IActionResult RecovaryDeleted3(int id)
+        {
+            var hh = db.Nahias.Find(id);
+            hh.IsDeleted3 = true;
+            db.SaveChanges();
+            return RedirectToAction();
+        }
+        public IActionResult Recovary3()
+        {
+
+            return View(db.Nahias.Where(x => x.IsDeleted == true && x.IsDeleted2 == true && x.IsDeleted3 == true));
+
+
+
         }
         [HttpGet]
         public IActionResult Activate(int id)
@@ -37,15 +106,7 @@ namespace CRVS.UI.Controllers
 
         }
         [HttpGet]
-        public IActionResult RecovaryDeleted(int id)
-        {
-
-            var nahia = repository.GetById(id);
-            nahia.IsDeleted = false;
-            db.SaveChanges();
-            return RedirectToAction(nameof(Index));
-
-        }
+        
         [HttpGet]
         public IActionResult DeActivate(int id)
 
@@ -67,22 +128,6 @@ namespace CRVS.UI.Controllers
 
             return View(db.Nahias.Where(x => x.IsActive == false));
         }
-
-        public IActionResult SoftDelete(int id)
-        {
-            var mm = db.Nahias.Find(id);
-            mm.IsDeleted = true;
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        public IActionResult Recovary()
-        {
-
-            return View(db.Nahias.Where(x => x.IsDeleted == true));
-        }
-
-
-
 
         [HttpGet]
         public IActionResult Create()

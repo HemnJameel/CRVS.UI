@@ -2,6 +2,7 @@
 using CRVS.Core.Models;
 using CRVS.EF;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRVS.UI.Controllers
@@ -9,25 +10,31 @@ namespace CRVS.UI.Controllers
     public class DohController : Controller
     {
         public IBaseRepository<Doh> repository;
+        public IBaseRepository<Governorite> repositoryGov;
         public IBaseRepository<DohHistory> Drepository;
         private ApplicationDbContext db;
-        public DohController(ApplicationDbContext _db, IBaseRepository<Doh> _repository, IBaseRepository<DohHistory> drepository)
+        public DohController(ApplicationDbContext _db,
+            IBaseRepository<Doh> _repository,
+            IBaseRepository<DohHistory> drepository, IBaseRepository<Governorite> _repositoryGov)
         {
 
             repository = _repository;
             Drepository = drepository;
             db = _db;
+            repositoryGov = _repositoryGov;
         }
         public IActionResult Index()
         {
 
-            return View(repository.GetAll().Where(x => x.IsDeleted == false));
+            return View(repository.GetAll().Where(x => x.IsDeleted == false &&
+            x.IsDeleted2 == false&& x.IsDeleted3 == false));
         }
 
         public IActionResult AllActivate()
         {
 
-            return View(db.Dohs.Where(x=>x.IsActive==true));
+            return View(db.Dohs.Where(x => x.IsActive == true));
+
         }
         public IActionResult AllNotActivate()
         {
@@ -36,50 +43,78 @@ namespace CRVS.UI.Controllers
         }
         public IActionResult SoftDelete(int id)
         {
-            var mm = db.Dohs.Find(id);
-            mm.IsDeleted = true;
+            var hh = db.Dohs.Find(id);
+            hh.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         public IActionResult RecovaryDeleted(int id)
         {
-            var mm = db.Dohs.Find(id);
-            mm.IsDeleted = false;
+            var hh = db.Dohs.Find(id);
+            hh.IsDeleted = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
         public IActionResult Recovary()
         {
 
-            return View(db.Dohs.Where(x => x.IsDeleted == true));
+            return View(db.Dohs.Where(x => x.IsDeleted == true && x.IsDeleted2 == false && x.IsDeleted3 == false));
         }
         public IActionResult SoftDelete2(int id)
         {
-            var mm = db.Dohs.Find(id);
-            mm.IsDeleted2 = false;
+            var hh = db.Dohs.Find(id);
+            hh.IsDeleted2 = true;
+            hh.IsDeleted3 = false;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Recovary2");
         }
+
         public IActionResult RecovaryDeleted2(int id)
         {
-            var mm = db.Dohs.Find(id);
-            mm.IsDeleted2 = true;
+            var hh = db.Dohs.Find(id);
+            hh.IsDeleted2 = false;
+            hh.IsDeleted3 = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
         public IActionResult Recovary2()
         {
 
-            return View(db.Dohs.Where(x => x.IsDeleted2 == true));
+            return View(db.Dohs.Where(x => x.IsDeleted == true && x.IsDeleted2 == true && x.IsDeleted3 == false));
+
+
+
+        }
+        public IActionResult SoftDelete3(int id)
+        {
+            var hh = db.Dohs.Find(id);
+            hh.IsDeleted3 = true;
+            db.SaveChanges();
+            return RedirectToAction("Recovary3");
         }
 
+        public IActionResult RecovaryDeleted3(int id)
+        {
+            var hh = db.Dohs.Find(id);
+            hh.IsDeleted3 = true;
+            db.SaveChanges();
+            return RedirectToAction();
+        }
+        public IActionResult Recovary3()
+        {
+
+            return View(db.Dohs.Where(x => x.IsDeleted == true && x.IsDeleted2 == true && x.IsDeleted3 == true));
+
+
+
+        }
         [HttpGet]
         public IActionResult Create()
         {
-
+            ViewBag.gov = new SelectList(repositoryGov.GetAll(), "GovernoriteId", "GovernoriteName");
             return View();
         }
-
         [HttpPost]
         public IActionResult Create(Doh doh)
         {
@@ -138,11 +173,11 @@ namespace CRVS.UI.Controllers
         [HttpGet]
         public IActionResult Activate(int id)
         {
-       
+
             var doh = repository.GetById(id);
-            doh.IsActive=true;
+            doh.IsActive = true;
             db.SaveChanges();
-         return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
 
         }
         [HttpGet]
@@ -167,10 +202,10 @@ namespace CRVS.UI.Controllers
 
         }
         [HttpPost]
-     
-        public IActionResult Edit( Doh doh)
+
+        public IActionResult Edit(Doh doh)
         {
-           
+
             // Default Values
             if (ModelState.IsValid)
             {
@@ -209,4 +244,3 @@ namespace CRVS.UI.Controllers
 
 
 }
-

@@ -6,11 +6,8 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
-    <a asp-action="Recovary">Deleted</a>
 
-
-
+   <a asp-action="Recovary2">Deleted</a>
 
 </p>
 <table class="table">
@@ -55,9 +52,12 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.NahiaId">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.NahiaId">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.NahiaId">Delete</a>
+                    <a asp-action="SoftDelete2" class="btn btn-danger " asp-route-id="@item.NahiaId">Soft Delete 2</a>
                     <a asp-action="History" asp-route-id="@item.NahiaId">History</a>
-                    <a asp-action="Recovary" asp-route-id="@item.NahiaId">Recovary</a>
+
+
+
+
                 </td>
 
             </tr>

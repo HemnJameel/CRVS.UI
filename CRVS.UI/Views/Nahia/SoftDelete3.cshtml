@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<CRVS.Core.Models.Nahia>
 @{
-    ViewData["Title"] = "SoftDelete";
+    ViewData["Title"] = "SoftDelete3";
 }
 
-<h1>SoftDelete</h1>
+<h1>SoftDelete3</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -18,7 +18,7 @@
 
 
             <th>
-                @Html.DisplayNameFor(model => model.IsDeleted)
+                @Html.DisplayNameFor(model => model.IsDeleted3)
             </th>
             <th></th>
         </tr>
@@ -34,7 +34,7 @@
 
                 <th>
 
-                    @if (item.IsDeleted == true)
+                    @if (item.IsDeleted3 == true)
                     {
                         <a asp-action="Delete" asp-route-id="@item.NahiaId" class="text-success">Delete</a>
                     }
@@ -54,6 +54,7 @@
                     @*<a asp-action="Delete" asp-route-id="@item.DohId">Delete</a>*@
                     <a asp-action="History" asp-route-id="@item.NahiaId">History</a>
                     <a asp-action="SoftDelete" asp-route-id="@item.NahiaId">SoftDelete</a>
+                    <a asp-action="SoftDelete3" asp-route-id="@item.NahiaId">SoftDelete3</a>
                 </td>
             </tr>
         }

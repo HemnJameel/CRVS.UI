@@ -22,7 +22,8 @@ namespace CRVS.UI.Controllers
         public IActionResult Index()
         {
 
-            return View(repository.GetAll().Where(x => x.IsDeleted == false));
+            return View(repository.GetAll().Where(x => x.IsDeleted == false &&
+         x.IsDeleted2 == false && x.IsDeleted3 == false));
         }
         public IActionResult AllActivate()
         {
@@ -37,23 +38,73 @@ namespace CRVS.UI.Controllers
 
         public IActionResult SoftDelete(int id)
         {
-            var mm = db.Districts.Find(id);
-            mm.IsDeleted = true;
+            var hh = db.Districts.Find(id);
+            hh.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         public IActionResult RecovaryDeleted(int id)
         {
-            var mm = db.Districts.Find(id);
-            mm.IsDeleted = false;
+            var hh = db.Districts.Find(id);
+            hh.IsDeleted = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
         public IActionResult Recovary()
         {
 
-            return View(db.Districts.Where(x => x.IsDeleted == true));
+            return View(db.Districts.Where(x => x.IsDeleted == true && x.IsDeleted2 == false && x.IsDeleted3 == false));
         }
+        public IActionResult SoftDelete2(int id)
+        {
+            var hh = db.Districts.Find(id);
+            hh.IsDeleted2 = true;
+            hh.IsDeleted3 = false;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult RecovaryDeleted2(int id)
+        {
+            var hh = db.Districts.Find(id);
+            hh.IsDeleted2 = false;
+            hh.IsDeleted3 = false;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult Recovary2()
+        {
+
+            return View(db.Districts.Where(x => x.IsDeleted == true && x.IsDeleted2 == true && x.IsDeleted3 == false));
+
+
+
+        }
+        public IActionResult SoftDelete3(int id)
+        {
+            var hh = db.Districts.Find(id);
+            hh.IsDeleted3 = true;
+            db.SaveChanges();
+            return RedirectToAction("Recovary3");
+        }
+
+        public IActionResult RecovaryDeleted3(int id)
+        {
+            var hh = db.Districts.Find(id);
+            hh.IsDeleted3 = true;
+            db.SaveChanges();
+            return RedirectToAction();
+        }
+        public IActionResult Recovary3()
+        {
+
+            return View(db.Districts.Where(x => x.IsDeleted == true && x.IsDeleted2 == true && x.IsDeleted3 == true));
+
+
+
+        }
+
 
         [HttpGet]
         public IActionResult Create()
